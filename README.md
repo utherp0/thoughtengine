@@ -52,17 +52,17 @@ All currency components will have additional metadata associated with them to al
 
 The definition tries to model the conceptual memory of a human being, and does it using the following different types of information:
 
-The Instance
+The Statement
 
-An instance is a singular piece of information based on a name-value pair. The Thought Engine will not implement the concepts of lists of information, but rather and more simply store multiple name-value pairs with the same name, i.e. the name will not be unique within the memory. 
+A statement is a singular piece of information based on a name-value pair. The Thought Engine will not implement the concepts of lists of information, but rather and more simply store multiple name-value pairs with the same name, i.e. the name will not be unique within the memory. 
 
-The Instance acts as an atomic piece of memory, and instances themselves can be associated with higher level currencies (defined in this section) to imply ownership, but can also be non-associated. 
+The Statement acts as an atomic piece of memory, and statements themselves can be associated with higher level currencies (defined in this section) to imply ownership, but can also be non-associated. 
 
-It will be the job of Memes to generate additional memories that associate instances, and other instances. 
+It will be the job of Memes to generate additional memories that associate statements, and other statements. 
 
-Important – the Instance will also have within its data the ability to state a 'not' state. This will allow Thought Engines to maintain one form of Instance and not have external logic (although external logic will be implemented in Memes for association and inference). In action this means that the Thought Engine will have instances such as - “colour:black” “colour:white” “colour:NOT blue”. This inclusion of NOT logic in the value itself allows for a much more simplistic and easy to interpret data set without extraneous 'extra-instance' logic. The goal is to make the memories simple to store and interpret without having to maintain extra information alongside the memories.
+Important – the Statement will also have within its data the ability to state a 'not' state. This will allow Thought Engines to maintain one form of Statement and not have external logic (although external logic will be implemented in Memes for association and inference). In action this means that the Thought Engine will have statements such as - “colour:black” “colour:white” “colour:NOT blue”. This inclusion of NOT logic in the value itself allows for a much more simplistic and easy to interpret data set without extraneous 'extra-statement' logic. The goal is to make the memories simple to store and interpret without having to maintain extra information alongside the memories.
 
-As previous stated the instances can be associated to higher level currency elements but the inference is never stored in the instance itself. It is the job of the higher level currency components to maintain the association and keep the instances agnostic.
+As previous stated the statements can be associated to higher level currency elements but the inference is never stored in the statement itself. It is the job of the higher level currency components to maintain the association and keep the statements agnostic.
 
 The Type
 
@@ -90,13 +90,13 @@ This can be seen as having a Type that would 'implement' the required Instances 
 
 The key message around Archetypes is that they define rather than state the nature of a type, and that there is no final information in an Archetype.
 
-The Object
+The Instance
 
-An Object is a 'physical' instantiation within the Thought Engine. It consists of a name, which defines 'it', a set of non-associated Instances, zero or one Types and the appropriately associated instances and zero or more Archetypes which define the Instances required (without values). 
+An Instance is a 'physical' instantiation within the Thought Engine. It consists of a name, which defines 'it', a set of non-associated Statements, zero or one Types and the appropriately associated statements and zero or more Archetypes which define the Statements required (without values). 
 
-An Object does not need to be completely defined. For instance, an Object can have an associated Archetype but not have the defined Instances within itself. This is defined as a 'non-realised' Archetype but allows the Thought Engine the ability to infer and realise an Archetype.
+An Instance does not need to be completely defined. For instance, an Instance can have an associated Archetype but not have the defined Statements within itself. This is defined as a 'non-realised' Archetype but allows the Thought Engine the ability to infer and realise an Archetype.
 
-The definition of an Object is also non-fixed in that a Thought Engine can have an Object with no components within it. Such an object should be quickly rationalised out but this is one of the aspects that the system is designed to do itself as opposed to being forced in a non-intuitive, non-intelligent way to discard data.
+The definition of an Instance is also non-fixed in that a Thought Engine can have an Instance with no components within it. Such an instance should be quickly rationalised out but this is one of the aspects that the system is designed to do itself as opposed to being forced in a non-intuitive, non-intelligent way to discard data.
 
 
 Persistence and Storage of Memories
@@ -105,7 +105,7 @@ The definition of currency provides a complex and useful set of tools for simula
 
 The Thought Engines will have the concept of a Memory Cell, which in simple terms will be a box in which currency can be stored, These cells will not be singular, i.e. a Thought Engine will have the ability to have multiple cells and, most importantly, each Cell is separate and unique. This will allow a singular Thought Engine to have effectively contradictory memories without complicating the storage of currency – the Thought Engine will be able to compartment information.
 
-Each Cell will consist of a pool for non-associated Instances, a pool for Types, a pool for Archetypes and a pool for Objects. Within the Cell an appropriate level of implied uniqueness will be maintained (i.e. depending on the nature of the Thought Engine, there may be a rule which defines that all archetypes must be unique, and in this case that rule will be applied within the Cell, meaning that within the Cell itself the Archetype name must be unique, but a Thought Engine can have multiple Cells, and each Cell can have one copy of the named Archetype.
+Each Cell will consist of a pool for non-associated Statements, a pool for Types, a pool for Archetypes and a pool for Instances. Within the Cell an appropriate level of implied uniqueness will be maintained (i.e. depending on the nature of the Thought Engine, there may be a rule which defines that all archetypes must be unique, and in this case that rule will be applied within the Cell, meaning that within the Cell itself the Archetype name must be unique, but a Thought Engine can have multiple Cells, and each Cell can have one copy of the named Archetype.
 
 This allows for a powerful level of storage for a Thought Engine to be able to do cross-Cell comparative analytics and inference.
 
@@ -143,7 +143,7 @@ One implementation in design is as follows:
 
 1: Select a unit of Currency within the Cell.
 
-2: Depending on the Unit of Currency apply a thresholded mutation – i.e. in the case of a value within an instance take the physical contents of the value and apply a point mutation, where the position and length of the mutation is decided randomly based on the size of the data, and the relevant chunk of data is altered randomly based on a genetic approach, i.e. either do a flip ('abcdef', start point 2, length of genome 2, results in 'acbdef') or do a randomised replace ('abcdef', start point 3, length 2, randomised results in something like 'abfaef', where it has chosen to replace the individual components with a randomised choice from the others).
+2: Depending on the Unit of Currency apply a thresholded mutation – i.e. in the case of a value within a statement take the physical contents of the value and apply a point mutation, where the position and length of the mutation is decided randomly based on the size of the data, and the relevant chunk of data is altered randomly based on a genetic approach, i.e. either do a flip ('abcdef', start point 2, length of genome 2, results in 'acbdef') or do a randomised replace ('abcdef', start point 3, length 2, randomised results in something like 'abfaef', where it has chosen to replace the individual components with a randomised choice from the others).
 
 3: Depending on a randomised and thresholded check, either replace the original data with the mutated data or add an additional identically named component (where you can – obviously with a unique Archetype approach you cannot have multiple same-name Archetypes). This choice would again depend on the genetic definitions (i.e. in some states you must retain the length of genome, for instance it must have 8 characters, and in some the length of the genome is inconsequential).
 
