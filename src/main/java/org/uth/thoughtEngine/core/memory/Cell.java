@@ -131,6 +131,26 @@ public class Cell
   public Map<String,Instance> getInstances() { return _instances; }
   public int getTrust() { return _trust; }
   
+  /**
+   * Instance lookup. This is used in order to make safe direct calls to getInstance.
+   * @param name instance to check
+   * @return true if the named instance exists, false if it does not
+   */
+  public boolean hasInstance( String name )
+  {
+    return _instances.containsKey(name);
+  }
+
+  /**
+   * Instance accessor - this is for altering an existing instance.
+   * @param name instance to return
+   * @return the instance or null if it doesn't exist
+   */
+  public Instance getInstance( String name )
+  {
+    return( _instances.containsKey(name) ? _instances.get(name) : null );
+  }
+  
   public void bulkLoadStatements( List<String> statements )
   {
     for( String statement : statements )

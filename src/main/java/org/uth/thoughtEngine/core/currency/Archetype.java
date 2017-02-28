@@ -4,17 +4,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.uth.thoughtEngine.exceptions.StatementException;
 
 /**
  * Archetype is a loosely bound set of statement names that define a type of object.
  * Each archetype consists of a name and a flag indicating whether or not this statement name 
  * is optional within the archetype.
+ * It also contains and optional list of definition statements. These are used for
+ * identifying potential instances *but* are not binding unless the Cell enforces them.
+ * The definitipns can be used natively with the StatementSearch util.
  * @author Ian Lawson
  */
 public class Archetype 
 {
   private String _name = null;
   private Map<String,Boolean> _components = null; 
+  private List<String> _definitions = null;
   private int _consistency = 0;
   private String _originator = null;
   
@@ -22,6 +27,7 @@ public class Archetype
   {
     _name = name;
     _components = new HashMap<String,Boolean>();
+    _definitions = new ArrayList<String>();
     _originator = originator;
   }
   
@@ -62,6 +68,69 @@ public class Archetype
     }
     
     return output;
+  }
+  
+  public List<String> getDefinitions() { return _definitions; }
+  
+  /**
+   * Add a definition. The rules are that the definition must be a valid statement format.
+   * @param statement statement to add as definition for the archetype.
+   * @return true if added, false if the format was invalid
+   */
+  public boolean addDefinition( String statement )
+  {
+    try
+    {
+      Statement.checkStatement(statement);
+
+      _definitions.add(statement);
+      
+      return true;
+    }
+    catch( StatementException exc )
+    {
+      return false;
+    }
+  }
+  
+  /**
+   * Remove *exact* definition from archetype.
+   * @param definition definition to remove
+   * @return true if definition removed, false if it doesn't exist
+   */
+  public boolean removeExactDefinition( String definition )
+  {
+    if( _definitions.contains(definition))
+    {
+      _definitions.remove(definition);
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+  
+  /**
+   * Remove named definitions. This removes all statements that *start* with the 
+   * given target. This can be name *or* name:value
+   * @param name statement to remove as a definition
+   * @return count of definitions removed
+   */
+  public int removeAllNamedDefinitions( String name )
+  {
+    int count = 0;
+    
+    for( String definition : _definitions )
+    {
+      if( definition.startsWith(name))
+      {
+        _definitions.remove(definition);
+        count++;
+      }
+    }
+    
+    return count;
   }
 
   /**

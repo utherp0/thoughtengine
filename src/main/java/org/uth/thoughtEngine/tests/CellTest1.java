@@ -49,18 +49,18 @@ public class CellTest1
     // Fragment statements
     try
     {
-      _memory.addStatement("dog.colour:white:string:Uther:100");
-      _memory.addStatement("dog.colour:!black:string:Uther:100");
-      _memory.addStatement("dog.legs:4:number:Uther:100");
-      _memory.addStatement("dog.name:Rex:string:Uther:100");
+      _memory.addStatement("colour:white:string:Uther:100");
+      _memory.addStatement("colour:!black:string:Uther:100");
+      _memory.addStatement("legs:4:number:Uther:100");
+      _memory.addStatement("name:Rex:string:Uther:100");
     
-      _memory.addStatement("cat.colour:black:string:Uther:100");
-      _memory.addStatement("cat.colour:!white:string:Uther:100");
-      _memory.addStatement("cat.legs:4:number:Uther:100");
-      _memory.addStatement("cat.name:Puss:string:Uther:100");
+      _memory.addStatement("colour:black:string:Uther:100");
+      _memory.addStatement("colour:!white:string:Uther:100");
+      _memory.addStatement("legs:4:number:Uther:100");
+      _memory.addStatement("name:Puss:string:Uther:100");
     
-      _memory.addStatement("spider.colour:black:string:Uther:100");
-      _memory.addStatement("spider.legs:8:number:Uther:100");
+      _memory.addStatement("colour:black:string:Uther:100");
+      _memory.addStatement("legs:8:number:Uther:100");
     }
     catch( StatementException exc )
     {
@@ -111,6 +111,11 @@ public class CellTest1
     
     _memory.addArchetype(spiderType);
     System.out.println( spiderType.toString());
+    
+    // Pair the instances with archetypes.
+    _memory.getInstance("Spider").addArchetype("arachnid");
+    _memory.getInstance("Dog").addArchetype("canine");
+    _memory.getInstance("Cat").addArchetype("feline");
     
     // Test 1 - statements
     System.out.println( "Statements:");
