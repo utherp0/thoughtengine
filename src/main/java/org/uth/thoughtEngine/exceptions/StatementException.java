@@ -2,7 +2,7 @@ package org.uth.thoughtEngine.exceptions;
 
 /**
  * Statement exception (format, contents etc).
- * @author Ian Lawson
+ * @author Ian 'Uther' Lawson
  */
 public class StatementException extends Exception
 {
